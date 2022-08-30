@@ -38,12 +38,12 @@ asset_model_id = args.model_id
 #Function to create assets from asset model (TODO add a check, if asset already exit skip creation and list asset instead)
 def CreateAsset(asset_model_id, n):#The ID must be provided and "n" for pumpingstation number
     create_asset_json = sp.getoutput(f"aws iotsitewise create-asset \
-    --asset-name pumpingstation{n} \
+    --asset-name productionplant{n} \
     --asset-model-id {asset_model_id}")
    
     print (create_asset_json)
  
-    print (f"pumpingstation{n} created")
+    print (f"productionplant{n} created")
     create_asset = json.loads(create_asset_json) 
     asset_id = create_asset["assetId"]
     print(f"Asset id is {asset_id}")
@@ -83,7 +83,7 @@ def AssociateTimeStreams(property_id_info_list, asset_id, number_of_messuraments
     for x in range(0,number_of_messuraments): 
         item_alias= property_id_info_list[x][0]
         property_id = property_id_info_list[x][1]
-        alias = f"/pumpingstation/{station_number}/{item_alias}"
+        alias = f"/productionplant/{station_number}/{item_alias}"
         #assoicate the timestream to asset
         associate_timestreams = sp.getoutput(f"aws iotsitewise associate-time-series-to-asset-property  \
         --alias {alias} \
@@ -123,7 +123,7 @@ for n in range(1, 11):
     time.sleep(1)#some delay to allow the operation
     print (property_id_info_list)
     AssociateTimeStreams(property_id_info_list, asset_id, number_of_messuraments, station_number)
-    print (f"Pumping Station Number {station_number} is ready" )
+    print (f"Production Plant Number {station_number} is ready" )
             
     
 print ("The script finished gracefully congratulations !!!!")
