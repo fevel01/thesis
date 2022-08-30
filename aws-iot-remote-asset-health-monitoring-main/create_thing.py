@@ -33,7 +33,7 @@ print(path)
 
 #defines iot thing creation command
 def CreateThing():
-     create_thing_json = sp.getoutput("aws iot create-thing --thing-name all_pumping_stations")
+     create_thing_json = sp.getoutput("aws iot create-thing --thing-name all_production_plant")
      create_thing = json.loads(create_thing_json)
      print(create_thing)
      thing_id = create_thing["thingName"]
@@ -42,7 +42,7 @@ def CreateThing():
 #defines policy creation function and command    
 def CreatePolicy():
 
-    cli_cmd = f'aws iot create-policy --policy-name "pumping_station_simulation" --policy-document file://thing_policy.json'
+    cli_cmd = f'aws iot create-policy --policy-name "production_plant_simulation" --policy-document file://thing_policy.json'
     print(cli_cmd)
     create_policy_json = sp.getoutput(cli_cmd)
     print(create_policy_json)
@@ -54,9 +54,9 @@ def CreatePolicy():
 #defines certificates and keys creation command 
 def CreateCertKeys():
     create_cert_key_json = sp.getoutput('aws iot create-keys-and-certificate \
-    --certificate-pem-outfile "all_pumping_stations.cert.pem" \
-    --public-key-outfile "all_pumping_stations.public.key" \
-    --private-key-outfile "all_pumping_stations.private.key" \
+    --certificate-pem-outfile "all_production_plant.cert.pem" \
+    --public-key-outfile "all_production_plant.public.key" \
+    --private-key-outfile "all_production_plant.private.key" \
     --set-as-active')
     print(create_cert_key_json)
     create_cert_key = json.loads(create_cert_key_json)  
