@@ -90,16 +90,16 @@ port = args.port
 useWebsocket = args.useWebsocket
 clientId = args.clientId
 topic = args.topic
-topic1 = "/pumpingstation/1"
-topic2 = "/pumpingstation/2"
-topic3 = "/pumpingstation/3"
-topic4 = "/pumpingstation/4"
-topic5 = "/pumpingstation/5"
-topic6 = "/pumpingstation/6"
-topic7 = "/pumpingstation/7"
-topic8 = "/pumpingstation/8"
-topic9 = "/pumpingstation/9"
-topic10 ="/pumpingstation/10"
+topic1 = "/productionplant/1"
+topic2 = "/productionplant/2"
+topic3 = "/productionplant/3"
+topic4 = "/productionplant/4"
+topic5 = "/productionplant/5"
+topic6 = "/productionplant/6"
+topic7 = "/productionplant/7"
+topic8 = "/productionplant/8"
+topic9 = "/productionplant/9"
+topic10 ="/productionplant/10"
 
 if args.mode not in AllowedActions:
     parser.error("Unknown --mode option %s. Must be one of %s" % (args.mode, str(AllowedActions)))
@@ -273,18 +273,14 @@ while True:
     def datagen_template(n):
         number = str(n)
         datagen_template_data= {
-                        "Name" : "pumpingstation"+number,
+                        "Name" : "productionplant"+number,
                         "Location" : "",
                         "UUID" : "",
                         "timestamp": "",
                         "Inference": "",  #provision for inference action from AWS 
                         "Temperature": 50, 
-                        "Humidity": 60,
-                        "Pressure": 255,
-                        "Vibration" : 13, 
+                        "Distance": 60,
                         "Flow": 20,
-                        "rpm": 340,
-                        "PowerConsumption": 4000,
                         "Amperage": 15,
                         "Voltage": 220,
                         "Fan": False,
@@ -372,36 +368,6 @@ while True:
                 elif json_object_in["Temperature"] >=80:
                     temperature = json_object_in["Temperature"] -1
                     
-                #HUMIDITY
-                #baseline value %
-                humidity = json_object_in["Humidity"]
-                if json_object_in["Humidity"] in range (60,70):
-                    humidity = json_object_in["Humidity"] + random.randint(-1,1)
-                elif json_object_in["Humidity"] <=65:
-                    humidity = json_object_in["Humidity"] + 1
-                elif json_object_in["Humidity"] >=70:
-                    humidity = json_object_in["Humidity"] -1 
-                    
-                #PRESSURE
-                #baseline value PSI 
-                pressure = json_object_in["Pressure"]
-                if json_object_in["Pressure"] in range (220,260):
-                    pressure = json_object_in["Pressure"] + random.randint(-10,10)
-                elif json_object_in["Pressure"] <=220:
-                    pressure = json_object_in["Pressure"] + 5
-                elif json_object_in["Pressure"] >=250:
-                    pressure = json_object_in["Pressure"] - 5
-                    
-                #VIBRATION 
-                 #baseline value for vibration frequency
-                vibration = json_object_in["Vibration"]
-                if json_object_in["Vibration"] in range (10,20):
-                    vibration = json_object_in["Vibration"] + random.randint(-1,1)
-                elif json_object_in["Vibration"] <=15:
-                    vibration = json_object_in["Vibration"] + 1
-                elif json_object_in["Vibration"] >=20:
-                    vibration = json_object_in["Vibration"] -1
-                   
                     
                 #FLOW
                 #baseline value for flow, cubic meters per second 
@@ -425,17 +391,6 @@ while True:
                 elif json_object_in["rpm"] >=450:
                     rpm = json_object_in["rpm"] - 10
                     
-                    
-                #POWER_CONSUPTION
-                #baseline value for the power consuption
-                power_consumption = json_object_in["PowerConsumption"]
-                power_consumption_randomize = [-25,-50,25,50]
-                if json_object_in["PowerConsumption"] in range (4100,4500):
-                    power_consumption = json_object_in["PowerConsumption"] + random.choice(power_consumption_randomize)
-                elif json_object_in["PowerConsumption"] <=4100:
-                    power_consumption = json_object_in["PowerConsumption"] + 25
-                elif json_object_in["PowerConsumption"] >=4500:
-                    power_consumption = json_object_in["PowerConsumption"] - 25    
                 
                 #AMPERAGE   
                 #baseline value for amperage
@@ -465,18 +420,13 @@ while True:
                 
                 
                 out_message = {
-                            "Name" : "pumpingstation"+number,
+                            "Name" : "productionplant"+number,
                             "Location" : location,
                             "UUID" : UUID,
                             "timestamp": format_timestamp,
                             "Inference": "",  #provision for inference action from AWS 
                             "Temperature": temperature, 
-                            "Humidity": humidity,
-                            "Pressure": pressure,
-                            "Vibration" : vibration, 
                             "Flow": flow,
-                            "rpm": rpm,
-                            "PowerConsumption": power_consumption,
                             "Amperage": amperage,
                             "Voltage": voltage,
                             "Fan": manual_override,
@@ -500,37 +450,7 @@ while True:
                 elif json_object_in["Temperature"] >=55:
                     temperature = json_object_in["Temperature"] -1
                     
-                #HUMIDITY
-                #baseline value %
-                humidity = json_object_in["Humidity"] 
-                if json_object_in["Humidity"] in range (60,65):
-                    humidity = json_object_in["Humidity"] + random.randint(-1,1)
-                elif json_object_in["Humidity"] <=60:
-                    humidity = json_object_in["Humidity"] + 1
-                elif json_object_in["Humidity"] >=65:
-                    humidity = json_object_in["Humidity"] -1 
-                    
-                #PRESSURE
-                #baseline value PSI 
-                pressure = json_object_in["Pressure"]
-                if json_object_in["Pressure"] in range (240,260):
-                    pressure = json_object_in["Pressure"] + random.randint(-10,10)
-                elif json_object_in["Pressure"] <=240:
-                    pressure = json_object_in["Pressure"] + 5
-                elif json_object_in["Pressure"] >=260:
-                    pressure = json_object_in["Pressure"] - 5
-                    
-                #VIBRATION 
-                #baseline value for vibration frequency
-                vibration = json_object_in["Vibration"]
-                if json_object_in["Vibration"] in range (11,14):
-                    vibration = json_object_in["Vibration"] + random.randint(-1,1)
-                elif json_object_in["Vibration"] <=11:
-                    vibration = json_object_in["Vibration"] + 1
-                elif json_object_in["Vibration"] >=14:
-                    vibration = json_object_in["Vibration"] -1
-                   
-                    
+                
                 #FLOW
                 #baseline value for flow, cubic meters per second 
                 flow = json_object_in["Flow"]
@@ -541,26 +461,6 @@ while True:
                 elif json_object_in["Flow"] >=25:
                     flow = json_object_in["Flow"] - 1
                 
-                #RPM
-                #baseline value for level starting from 50%
-                rpm = json_object_in["rpm"]
-                if json_object_in["rpm"] in range (300,350):
-                    rpm = json_object_in["rpm"] + random.randint(-10,10)
-                elif json_object_in["rpm"] <=300:
-                    rpm = json_object_in["rpm"] + 10
-                elif json_object_in["rpm"] >=350:
-                    rpm = json_object_in["rpm"] - 10
-                    
-                #POWER_CONSUPTION
-                #baseline value for the power consuption
-                power_consumption = json_object_in["PowerConsumption"]
-                power_consumption_randomize = [-25,-50,25,50]
-                if json_object_in["PowerConsumption"] in range (3800,4200):
-                    power_consumption = json_object_in["PowerConsumption"] + random.choice(power_consumption_randomize)
-                elif json_object_in["PowerConsumption"] <=3800:
-                    power_consumption = json_object_in["PowerConsumption"] + 25
-                elif json_object_in["PowerConsumption"] >=4200:
-                    power_consumption = json_object_in["PowerConsumption"] - 25    
                 
                 #AMPERAGE   
                 #baseline value for amperage
@@ -591,18 +491,13 @@ while True:
                 
                 
                 out_message = {
-                            "Name" : "pumpingstation"+number,
+                            "Name" : "productionplant"+number,
                             "Location" : location,
                             "UUID" : UUID,
                             "timestamp": format_timestamp,
                             "Inference": "",  #provision for inference action from AWS 
                             "Temperature": temperature, 
-                            "Humidity": humidity,
-                            "Pressure": pressure,
-                            "Vibration" : vibration, 
                             "Flow": flow,
-                            "rpm": rpm,
-                            "PowerConsumption": power_consumption,
                             "Amperage": amperage,
                             "Voltage": voltage,
                             "Fan": manual_override,
@@ -652,16 +547,12 @@ while True:
         message1 = {}
         #message['message'] = args.message
         message1['sequence'] = loopCount
-        message1['Alias'] = "/pumpingstation/001"
+        message1['Alias'] = "/productionplant/001"
         message1['Location'] = json_object_in_1["Location"]
         message1['UUID'] = json_object_in_1["UUID"]
         message1['Inference'] = json_object_in_1["Inference"]
         message1['Temperature'] = json_object_in_1["Temperature"]
-        message1['Humidity'] = json_object_in_1["Humidity"]
-        message1['Pressure'] = json_object_in_1["Pressure"]
-        message1['Vibration'] = json_object_in_1["Vibration"]
         message1['Flow'] = json_object_in_1["Flow"]
-        message1['rpm'] = json_object_in_1["rpm"]
         message1['Amperage'] = json_object_in_1["Amperage"]
         message1['Voltage'] = json_object_in_1["Voltage"]
         message1['Fan'] = json_object_in_1["Fan"]
@@ -669,16 +560,12 @@ while True:
         message2 = {}
         #message['message'] = args.message
         message2['sequence'] = loopCount
-        message2['Alias'] = "/pumpingstation/002"
+        message2['Alias'] = "/productionplant/002"
         message2['Location'] = json_object_in_2["Location"]
         message2['UUID'] = json_object_in_2["UUID"]
         message2['Inference'] = json_object_in_2["Inference"]
         message2['Temperature'] = json_object_in_2["Temperature"]
-        message2['Humidity'] = json_object_in_2["Humidity"]
-        message2['Pressure'] = json_object_in_2["Pressure"]
-        message2['Vibration'] = json_object_in_2["Vibration"]
         message2['Flow'] = json_object_in_2["Flow"]
-        message2['rpm'] = json_object_in_2["rpm"]
         message2['Amperage'] = json_object_in_2["Amperage"]
         message2['Voltage'] = json_object_in_2["Voltage"]
         message2['Fan'] = json_object_in_2["Fan"]
@@ -686,16 +573,12 @@ while True:
         message3 = {}
         #message['message'] = args.message
         message3['sequence'] = loopCount
-        message3['Alias'] = "/pumpingstation/003"
+        message3['Alias'] = "/productionplant/003"
         message3['Location'] = json_object_in_3["Location"]
         message3['UUID'] = json_object_in_3["UUID"]
         message3['Inference'] = json_object_in_3["Inference"]
         message3['Temperature'] = json_object_in_3["Temperature"]
-        message3['Humidity'] = json_object_in_3["Humidity"]
-        message3['Pressure'] = json_object_in_3["Pressure"]
-        message3['Vibration'] = json_object_in_3["Vibration"]
         message3['Flow'] = json_object_in_3["Flow"]
-        message3['rpm'] = json_object_in_3["rpm"]
         message3['Amperage'] = json_object_in_3["Amperage"]
         message3['Voltage'] = json_object_in_3["Voltage"]
         message3['Fan'] = json_object_in_3["Fan"]
@@ -703,16 +586,12 @@ while True:
         message4 = {}
         #message['message'] = args.message
         message4['sequence'] = loopCount
-        message4['Alias'] = "/pumpingstation/004"
+        message4['Alias'] = "/productionplant/004"
         message4['Location'] = json_object_in_4["Location"]
         message4['UUID'] = json_object_in_4["UUID"]
         message4['Inference'] = json_object_in_4["Inference"]
         message4['Temperature'] = json_object_in_4["Temperature"]
-        message4['Humidity'] = json_object_in_4["Humidity"]
-        message4['Pressure'] = json_object_in_4["Pressure"]
-        message4['Vibration'] = json_object_in_4["Vibration"]
         message4['Flow'] = json_object_in_4["Flow"]
-        message4['rpm'] = json_object_in_4["rpm"]
         message4['Amperage'] = json_object_in_4["Amperage"]
         message4['Voltage'] = json_object_in_4["Voltage"]
         message4['Fan'] = json_object_in_4["Fan"]
@@ -720,16 +599,12 @@ while True:
         message5 = {}
         #message['message'] = args.message
         message5['sequence'] = loopCount
-        message5['Alias'] = "/pumpingstation/005"
+        message5['Alias'] = "/productionplant/005"
         message5['Location'] = json_object_in_5["Location"]
         message5['UUID'] = json_object_in_5["UUID"]
         message5['Inference'] = json_object_in_5["Inference"]
         message5['Temperature'] = json_object_in_5["Temperature"]
-        message5['Humidity'] = json_object_in_5["Humidity"]
-        message5['Pressure'] = json_object_in_5["Pressure"]
-        message5['Vibration'] = json_object_in_5["Vibration"]
         message5['Flow'] = json_object_in_5["Flow"]
-        message5['rpm'] = json_object_in_5["rpm"]
         message5['Amperage'] = json_object_in_5["Amperage"]
         message5['Voltage'] = json_object_in_5["Voltage"]
         message5['Fan'] = json_object_in_5["Fan"]
@@ -737,16 +612,12 @@ while True:
         message6 = {}
         #message['message'] = args.message
         message6['sequence'] = loopCount
-        message6['Alias'] = "/pumpingstation/006"
+        message6['Alias'] = "/productionplant/006"
         message6['Location'] = json_object_in_6["Location"]
         message6['UUID'] = json_object_in_6["UUID"]
         message6['Inference'] = json_object_in_6["Inference"]
         message6['Temperature'] = json_object_in_6["Temperature"]
-        message6['Humidity'] = json_object_in_6["Humidity"]
-        message6['Pressure'] = json_object_in_6["Pressure"]
-        message6['Vibration'] = json_object_in_6["Vibration"]
         message6['Flow'] = json_object_in_6["Flow"]
-        message6['rpm'] = json_object_in_6["rpm"]
         message6['Amperage'] = json_object_in_6["Amperage"]
         message6['Voltage'] = json_object_in_6["Voltage"]
         message6['Fan'] = json_object_in_6["Fan"]
@@ -754,16 +625,12 @@ while True:
         message7 = {}
         #message['message'] = args.message
         message7['sequence'] = loopCount
-        message7['Alias'] = "/pumpingstation/007"
+        message7['Alias'] = "/productionplant/007"
         message7['Location'] = json_object_in_7["Location"]
         message7['UUID'] = json_object_in_7["UUID"]
         message7['Inference'] = json_object_in_7["Inference"]
         message7['Temperature'] = json_object_in_7["Temperature"]
-        message7['Humidity'] = json_object_in_7["Humidity"]
-        message7['Pressure'] = json_object_in_7["Pressure"]
-        message7['Vibration'] = json_object_in_7["Vibration"]
         message7['Flow'] = json_object_in_7["Flow"]
-        message7['rpm'] = json_object_in_7["rpm"]
         message7['Amperage'] = json_object_in_7["Amperage"]
         message7['Voltage'] = json_object_in_7["Voltage"]
         message7['Fan'] = json_object_in_7["Fan"]
@@ -771,16 +638,12 @@ while True:
         message8 = {}
         #message['message'] = args.message
         message8['sequence'] = loopCount
-        message8['Alias'] = "/pumpingstation/008"
+        message8['Alias'] = "/productionplant/008"
         message8['Location'] = json_object_in_8["Location"]
         message8['UUID'] = json_object_in_8["UUID"]
         message8['Inference'] = json_object_in_8["Inference"]
         message8['Temperature'] = json_object_in_8["Temperature"]
-        message8['Humidity'] = json_object_in_8["Humidity"]
-        message8['Pressure'] = json_object_in_8["Pressure"]
-        message8['Vibration'] = json_object_in_8["Vibration"]
         message8['Flow'] = json_object_in_8["Flow"]
-        message8['rpm'] = json_object_in_8["rpm"]
         message8['Amperage'] = json_object_in_8["Amperage"]
         message8['Voltage'] = json_object_in_8["Voltage"]
         message8['Fan'] = json_object_in_8["Fan"]
@@ -788,16 +651,12 @@ while True:
         message9 = {}
         #message['message'] = args.message
         message9['sequence'] = loopCount
-        message9['Alias'] = "/pumpingstation/009"
+        message9['Alias'] = "/productionplant/009"
         message9['Location'] = json_object_in_9["Location"]
         message9['UUID'] = json_object_in_9["UUID"]
         message9['Inference'] = json_object_in_9["Inference"]
         message9['Temperature'] = json_object_in_9["Temperature"]
-        message9['Humidity'] = json_object_in_9["Humidity"]
-        message9['Pressure'] = json_object_in_9["Pressure"]
-        message9['Vibration'] = json_object_in_9["Vibration"]
         message9['Flow'] = json_object_in_9["Flow"]
-        message9['rpm'] = json_object_in_9["rpm"]
         message9['Amperage'] = json_object_in_9["Amperage"]
         message9['Voltage'] = json_object_in_9["Voltage"]
         message9['Fan'] = json_object_in_9["Fan"]
@@ -805,16 +664,12 @@ while True:
         message10 = {}
         #message['message'] = args.message
         message10['sequence'] = loopCount
-        message10['Alias'] = "/pumpingstation/010"
+        message10['Alias'] = "/productionplant/010"
         message10['Location'] = json_object_in_10["Location"]
         message10['UUID'] = json_object_in_10["UUID"]
         message10['Inference'] = json_object_in_10["Inference"]
         message10['Temperature'] = json_object_in_10["Temperature"]
-        message10['Humidity'] = json_object_in_10["Humidity"]
-        message10['Pressure'] = json_object_in_10["Pressure"]
-        message10['Vibration'] = json_object_in_10["Vibration"]
         message10['Flow'] = json_object_in_10["Flow"]
-        message10['rpm'] = json_object_in_10["rpm"]
         message10['Amperage'] = json_object_in_10["Amperage"]
         message10['Voltage'] = json_object_in_10["Voltage"]
         message10['Fan'] = json_object_in_10["Fan"]
