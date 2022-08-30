@@ -1,1 +1,1 @@
-{"Name": "pumpingstation6", "Location": "UT", "UUID": "72ebbff2-b906-4961-9657-47e51df062cb", "timestamp": "2022-06-01T21:50:35.886898", "Inference": "", "Temperature": 49, "Flow": 18, "Amperage": 15, "Voltage": 220, "Fan": false}
+{"Name": "productionplant6", "Location": "UT", "UUID": "72ebbff2-b906-4961-9657-47e51df062cb", "timestamp": "2022-06-01T21:50:35.886898", "Inference": "", "Temperature": 49, "Flow": 18, "Amperage": 15, "Voltage": 220, "Fan": false}
