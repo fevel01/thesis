@@ -96,9 +96,9 @@ def AssociateTimeStreams(property_id_info_list, asset_id, number_of_messuraments
 #this for loop defines how many rules and assets will be created
 #note for this demostration we will be creating assests from 2-10 *(2-11 range) , as the pumping 1 will be manually created from the walkthrough
 # Asset creation loop *note the loop will start from 2 due to walkthrough blog
-for n in range(1, 11):
+for n in range(1, 7):
     station_number = n
-    number_of_messuraments = 10 #(TODO: automate that to grab number from asset model desciption)
+    number_of_messuraments = 6 #(TODO: automate that to grab number from asset model desciption)
     number_of_attributes = 0 #(TODO: automate that to grab number from asset model desciption)
     
     asset_id = CreateAsset(asset_model_id, station_number)
