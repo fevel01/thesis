@@ -524,25 +524,6 @@ for n in range(10):
         "title": "Fan",
         "type": "timeseries"
       },
-      
-      },
-        "pluginVersion": "8.4.7",
-        "targets": [
-          {
-            "assetId": Asset_ID,
-            "datasource": {
-              "type": "grafana-iot-sitewise-datasource",
-              "uid": None
-            },
-            "maxPageAggregations": 1,
-            "propertyId": rpm_ID,
-            "queryType": "PropertyValue",
-            "refId": "A"
-          }
-        ],
-        "title": "RPM",
-        "type": "stat"
-      },
       {
         "fieldConfig": {
           "defaults": {
