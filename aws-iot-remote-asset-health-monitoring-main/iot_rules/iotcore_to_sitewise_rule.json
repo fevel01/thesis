@@ -1,40 +1,14 @@
 {
-  "sql": "SELECT * FROM '/pumpingstation/1'",
-  "description": "Sends data to sitewise pumpingstation2",
+  "sql": "SELECT * FROM '/productionplant/1'",
+  "description": "Sends data to sitewise productionplant2",
   "ruleDisabled": false,
   "awsIotSqlVersion": "2016-03-23",
   "actions": [
     {
       "iotSiteWise": {
         "putAssetPropertyValueEntries":[
-                        {
-                            "propertyValues": [
-                                {
-                                    "timestamp": {
-                                        "timeInSeconds": "${floor(timestamp() / 1E3)}", 
-                                        "offsetInNanos": "0"
-                                    }, 
-                                    "value": {
-                                        "integerValue": "${get(*, \"Pressure\")}"
-                                    }
-                                }
-                            ], 
-                            "propertyAlias": "/pumpingstation/1/Pressure"
-                        }, 
-                        {
-                            "propertyValues": [
-                                {
-                                    "timestamp": {
-                                        "timeInSeconds": "${floor(timestamp() / 1E3)}", 
-                                        "offsetInNanos": "0"
-                                    }, 
-                                    "value": {
-                                        "integerValue": "${get(*, \"Vibration\")}"
-                                    }
-                                }
-                            ], 
-                            "propertyAlias": "/pumpingstation/1/Vibration"
-                        }, 
+                         
+                         
                         {
                             "propertyValues": [
                                 {
@@ -47,7 +21,7 @@
                                     }
                                 }
                             ], 
-                            "propertyAlias": "/pumpingstation/1/Flow"
+                            "propertyAlias": "/productionplant/1/Flow"
                         }, 
                         {
                             "propertyValues": [
@@ -61,7 +35,7 @@
                                     }
                                 }
                             ], 
-                            "propertyAlias": "/pumpingstation/1/Amperage"
+                            "propertyAlias": "/productionplant/1/Amperage"
                         }, 
                         {
                             "propertyValues": [
@@ -75,7 +49,7 @@
                                     }
                                 }
                             ], 
-                            "propertyAlias": "/pumpingstation/1/Voltage"
+                            "propertyAlias": "/productionplant/1/Voltage"
                         }, 
                         {
                             "propertyValues": [
@@ -89,7 +63,7 @@
                                     }
                                 }
                             ], 
-                            "propertyAlias": "/pumpingstation/1/Temperature"
+                            "propertyAlias": "/productionplant/1/Temperature"
                         }, 
                         {
                             "propertyValues": [
@@ -103,35 +77,7 @@
                                     }
                                 }
                             ], 
-                            "propertyAlias": "/pumpingstation/1/Fan"
-                        }, 
-                        {
-                            "propertyValues": [
-                                {
-                                    "timestamp": {
-                                        "timeInSeconds": "${floor(timestamp() / 1E3)}", 
-                                        "offsetInNanos": "0"
-                                    }, 
-                                    "value": {
-                                        "integerValue": "${get(*, \"rpm\")}"
-                                    }
-                                }
-                            ], 
-                            "propertyAlias": "/pumpingstation/1/rpm"
-                        }, 
-                        {
-                            "propertyValues": [
-                                {
-                                    "timestamp": {
-                                        "timeInSeconds": "${floor(timestamp() / 1E3)}", 
-                                        "offsetInNanos": "0"
-                                    }, 
-                                    "value": {
-                                        "integerValue": "${get(*, \"Humidity\")}"
-                                    }
-                                }
-                            ], 
-                            "propertyAlias": "/pumpingstation/1/Humidity"
+                            "propertyAlias": "/productionplant/1/Fan"
                         }, 
                         {
                             "propertyValues": [
@@ -145,7 +91,7 @@
                                     }
                                 }
                             ], 
-                            "propertyAlias": "/pumpingstation/1/Location"
+                            "propertyAlias": "/productionplant/1/Location"
                         }
                     ],
         "roleArn": "arn:aws:iam::318648012222:role/IoTCore_SiteWise_Role" 
