@@ -173,7 +173,7 @@ def CreateIoTRuleJSON(path, station_number, role_arn): #Inputs path and how many
     profile_exists = os.path.exists(f"{path}/iot_rules/iotcore_to_sitewise_rule_productionplant{n}.json")
     
     if profile_exists:
-        cmd = f"aws iot create-topic-rule --rule-name pumpingstation{n} --topic-rule-payload file://{path}/iot_rules/iotcore_to_sitewise_rule_productionplant{n}.json"
+        cmd = f"aws iot create-topic-rule --rule-name productionplant{n} --topic-rule-payload file://{path}/iot_rules/iotcore_to_sitewise_rule_productionplant{n}.json"
         create_rule = sp.getoutput(cmd)
         
         print(cmd)
