@@ -767,21 +767,6 @@ for n in range(10):
                 }
               ]
             },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Pressure"
-              },
-              "properties": [
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "orange",
-                    "mode": "fixed"
-                  }
-                }
-              ]
-            }
           ]
         },
         "gridPos": {
@@ -812,7 +797,7 @@ for n in range(10):
             "filter": "ALL",
             "maxPageAggregations": 1,
             "modelId": Model_ID,
-            "propertyId": Pressure_ID,
+            #"propertyId": Pressure_ID,
             "queryType": "PropertyValueHistory",
             "refId": "A",
             "region": "us-east-1",
