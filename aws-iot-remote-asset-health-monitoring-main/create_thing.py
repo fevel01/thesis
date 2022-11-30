@@ -42,7 +42,7 @@ def CreateThing():
 #defines policy creation function and command    
 def CreatePolicy():
 
-    cli_cmd = f'aws iot create-policy --policy-name "production_plant_simulation" --policy-document file://thing_policy.json'
+    cli_cmd = f'aws iot create-policy --policy-name "production_simulation" --policy-document file://thing_policy.json'
     print(cli_cmd)
     create_policy_json = sp.getoutput(cli_cmd)
     print(create_policy_json)
